@@ -1,0 +1,5345 @@
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ Entry Navigation 
+
+
+
+
+
+
+Entry Contents
+
+
+Bibliography
+
+
+Academic Tools
+
+
+Friends PDF Preview 
+
+
+Author and Citation Info 
+ 
+
+
+Back to Top 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dependence Logic
+First published Thu Feb 23, 2017; substantive revision Mon Mar 22, 2021
+
+
+
+
+
+Dependence logic is an extension of first-order logic which adds to it
+
+dependence atoms
+, that is, expressions of the form
+
+=
+(
+x
+1
+…
+x
+n
+,
+y
+)
+ which assert that the value of 
+y
+ is
+functionally dependent on (in other words, determined by) the values
+of 
+x
+1
+…
+x
+n
+. These atoms permit the specification of
+non-linearly ordered 
+dependency patterns
+ between variables,
+much in the same sense of IF-Logic 
+slashed quantifiers
+; but,
+differently from IF-logic, dependence logic separates quantification
+from the specification of such dependence/independence conditions.
+
+
+
+The principal semantics of dependence logic, called 
+team
+semantics
+, generalizes Tarski’s semantics by letting
+expressions be satisfied or not satisfied with respect to
+
+sets
+ of variable assignments rather than with respect to
+single assignments. This semantics pre-dates the development of
+dependence logic proper, and it was originally developed by Wilfrid
+Hodges in the context of IF-logic (Hodges 1997). There also exists a
+game-theoretic semantics for dependence logic, based on games of
+imperfect information and roughly analogous to the game-theoretic
+semantics for independence-friendly logic (Väänänen
+2007a). 
+Sensu stricto
+, the term “dependence
+logic” refers exclusively to the language obtained by adding the
+above-mentioned functional dependence atoms to the language of
+first-order logic; but the term is also used, in a more general sense,
+to refer to the the area of research that studies the properties of
+logics obtained by adding various 
+notions of dependence and
+independence
+ to first order logic, such as 
+independence
+logic
+ (Grädel & Väänänen 2013),
+
+intuitionistic dependence logic
+ (Yang 2013) or 
+inclusion
+logic
+ (Galliani 2012, Galliani & Hella 2013), or even those
+of logics extending 
+other
+ logical frameworks through similar
+atoms, as in the case of 
+modal dependence logic
+
+(Väänänen 2008).
+
+
+ In this article, the term “dependence logic” will be
+used to refer to dependence logic proper, and the term “logics
+of dependence and independence” will instead be used to refer to
+its variants and generalizations.
+
+
+
+
+
+
+
+
+
+
+1. Dependency patterns in first order logic and its extensions
+
+
+2. Team semantics
+
+
+
+
+2.1 Game-theoretic semantics
+
+
+
+
+3. Properties
+
+
+
+
+3.1 Expressivity
+
+
+3.2 Hierarchies in dependence logic
+
+
+3.3 Negation in dependence logic
+
+
+3.4 Truth, validity and proof systems in dependence logic
+
+
+
+
+4. Variants of dependence logic
+
+
+
+
+4.1 Independence Logic
+
+
+4.2 Inclusion logic
+
+
+4.3 Team Logic
+
+
+4.4 Intuitionistic Dependence Logic
+
+
+4.5 Generalized Dependencies and Connectives in Team Semantics
+
+
+4.6 Propositional Dependence Logic
+
+
+4.7 Modal Dependence Logic
+
+
+4.8 Linear Temporal Logic with Team Semantics
+
+
+4.9 Quantitative Variants of Team Semantics and Dependence Logic
+
+
+
+
+5. Applications of dependence logic
+
+
+
+
+5.1 Dependence logic and database theory
+
+
+5.2 Dependence logic and belief representation
+
+
+5.3 Dependence logic and Arrow’s theorem
+
+
+5.4 Quantum team logic and Bell’s inequalities
+
+
+
+
+Bibliography
+
+
+Academic Tools
+
+
+Other Internet Resources
+
+
+Related Entries
+
+
+
+
+
+
+
+
+
+
+
+
+1. Dependency patterns in first order logic and its extensions
+
+
+
+One feature of first order logic which accounts for much of its
+expressivity and applicability is the fact that it allows quantifiers
+to be 
+nested
+, and, hence, it permits the specification of
+
+dependency patterns
+ between quantified variables. Consider,
+for example, the (hopefully false) statement that “every boy
+loves some girl that loves some other boy”. It can be
+straightforwardly translated into first order logic as 
+
+
+∀
+x
+(
+BOY
+(
+x
+)
+→
+∃
+y
+(
+GIRL
+(
+y
+)
+∧
+LOVES
+(
+x
+,
+y
+)
+∧
+∃
+z
+(
+BOY
+(
+z
+)
+∧
+x
+≠
+z
+∧
+LOVES
+(
+y
+,
+z
+)
+)
+)
+)
+
+
+
+whose truth condition, according to Tarski’s usual semantics, is
+precisely what one would expect: the above expression is true if and
+only if for every boy 
+b
+ it is possible to find a girl 
+g
+ and a
+boy 
+b
+′
+ such that 
+b
+ loves 
+g
+ and 
+g
+ loves 
+b
+′
+ and
+
+b
+ and 
+b
+′
+ are not the same. The identity of the girl 
+g
+ may
+of course depend on the identity of the first boy 
+b
+—after
+all, for this expression to be true we do not require that all boys
+are in love with all girls—and, furthermore, the identity of the
+second boy 
+b
+′
+ may depend on 
+both
+ the identity of the
+first boy 
+b
+ (since 
+b
+′
+ must be different from 
+b
+) and from
+the identity of the girl 
+g
+ that 
+b
+ loves. So the 
+dependency
+pattern
+ between our quantified variables is as follows: 
+y
+
+depends on 
+x
+, while 
+z
+ depends on both 
+x
+ and 
+y
+. From a
+syntactic perspective, this is reflected by the fact that 
+∃
+y
+ is in the 
+scope
+ of 
+∀
+x
+ while 
+∃
+z
+ is
+in the scope of both 
+∀
+x
+ and 
+∃
+y
+.
+
+
+
+Differences in the dependency patterns between operators can be used
+to formalize important distinctions, such as for example the one
+between the continuity of a function 
+f
+ 
+
+
+∀
+x
+∀
+ϵ
+∃
+δ
+∀
+x
+′
+(
+|
+x
+−
+x
+′
+|
+<
+δ
+→
+|
+f
+(
+x
+)
+−
+f
+(
+x
+′
+)
+|
+<
+ϵ
+)
+
+
+
+and its uniform continuity 
+
+
+∀
+ϵ
+∃
+δ
+∀
+x
+∀
+x
+′
+(
+|
+x
+−
+x
+′
+|
+<
+δ
+→
+|
+f
+(
+x
+)
+−
+f
+(
+x
+′
+)
+|
+<
+ϵ
+)
+
+
+
+or, in intensional extensions of first order logic, to express the
+difference between 
+De Dicto
+ and 
+De Re
+ readings
+(e.g., “It is possible for every person to be crazy” may
+be understood either as stating that it for every person 
+p
+, it is
+possible for 
+p
+ to be crazy, 
+∀
+x
+(
+PERSON
+(
+x
+)
+→
+⬦
+CRAZY
+(
+x
+)
+)
+, or as stating that it is
+possible that everyone is crazy together, 
+⬦
+∀
+x
+(
+PERSON
+(
+x
+)
+→
+CRAZY
+(
+x
+)
+)
+).
+
+
+
+Dependency patterns between quantified variables in first order logic
+are necessarily 
+transitive
+, as it is made evident by their
+connections with the scopes of the corresponding sub-expressions: if
+
+∃
+y
+ is in the scope of 
+∀
+x
+ and 
+∃
+z
+ is in
+the scope of 
+∃
+y
+ then necessarily 
+∃
+z
+ will be in
+the scope of (and, therefore, dependent from) 
+∀
+x
+.
+Furthermore, the set of all quantifiers in whose scope some subformula
+
+α
+ lies is linearly ordered: if 
+α
+ is in the scope of
+
+Q
+1
+x
+1
+ and 
+Q
+2
+x
+2
+, then either 
+Q
+1
+x
+1
+ is in the scope
+of 
+Q
+2
+x
+2
+ or vice versa.
+
+
+
+This limits the expressive possibilities of first order logic. For
+example, let us suppose that we wish to amend our previous assertion
+about boys and girls as follows: every boy loves some girl that loves
+some other boy, and this second boy can be chosen independently on the
+first one. What this means, intuitively speaking, is simple enough:
+for every boy 
+b
+ we can find a girl 
+g
+ such that 
+b
+ loves
+
+g
+, and for every such girl we can find a boy 
+b
+′
+ such that
+
+g
+ loves 
+b
+′
+ and 
+b
+≠
+b
+′
+, and furthermore we can find
+the identity of the second boy 
+b
+′
+ without knowing that of 
+b
+,
+on the basis of the identity of the girl 
+g
+ alone. This can still
+be the true in some scenarios, such as for example if two boys 
+b
+1
+
+and 
+b
+2
+ love respectively two girls 
+g
+1
+ and 
+g
+2
+, who
+however love only 
+b
+2
+ and 
+b
+1
+ respectively. However, it is
+easily seen that it is not equivalent to our previous statement: for
+example, if our universe consists (as in (b) above) of two boys 
+b
+
+and 
+b
+′
+ and a girl 
+g
+, and 
+b
+ and 
+b
+′
+ both love 
+g
+ who
+loves both of them, then our previous assertion is true but the
+current one is false.
+
+
+
+
+
+
+
+Two scenarios in which (
+1
+) is true. In (a), 
+z
+
+can be chosen independently from 
+x
+; in (b), it cannot.
+
+
+
+
+
+However, it is not clear how to formalize this condition in first
+order logic. In essence, we would need to modify
+(
+1
+) so that 
+z
+ is not in the scope of 
+x
+,
+and hence it does not depend on it; however, we would still want 
+z
+
+to depend on 
+y
+ and 
+y
+ on 
+x
+. As just discussed, however,
+such a dependency pattern is not realizable in first-order logic. We
+can sidestep the issue by resorting to higher-order quantification:
+indeed, one can see that the expression 
+
+
+∃
+F
+∀
+x
+(
+BOY
+(
+x
+)
+→
+∃
+y
+(
+GIRL
+(
+y
+)
+∧
+LOVES
+(
+x
+,
+y
+)
+∧
+BOY
+(
+F
+(
+y
+)
+)
+∧
+x
+≠
+F
+(
+y
+)
+∧
+LOVES
+(
+y
+,
+F
+(
+y
+)
+)
+)
+)
+
+
+
+captures our intended interpretation, but only at the cost of explicit
+existential quantification over functions.
+
+
+
+A possible alternative would be to expand the syntax of first order
+logic in order to lift the restrictions about dependency patterns
+between quantified variables. This is the route taken by 
+branching
+quantifier logic
+ (Henkin 1961), in which the truth conditions of (
+2
+)
+correspond to those of 
+
+
+(
+∀
+x
+∃
+y
+∀
+z
+∃
+w
+)
+(
+BOY
+(
+x
+)
+→
+(
+GIRL
+(
+y
+)
+∧
+LOVES
+(
+x
+,
+y
+)
+∧
+(
+y
+=
+z
+→
+(
+BOY
+(
+w
+)
+∧
+x
+≠
+w
+∧
+LOVES
+(
+z
+,
+w
+)
+)
+)
+)
+)
+,
+
+
+
+and to 
+independence-friendly logic
+, in which
+(
+2
+) is equivalent to 
+
+
+∀
+x
+∃
+y
+(
+BOY
+(
+x
+)
+→
+(
+GIRL
+(
+y
+)
+∧
+LOVES
+(
+x
+,
+y
+)
+∧
+(
+∃
+z
+/
+x
+)
+(
+BOY
+(
+z
+)
+∧
+x
+≠
+z
+∧
+LOVES
+(
+y
+,
+z
+)
+)
+)
+)
+.
+
+
+
+We will not give here a detailed explanation of the semantics of these
+two formalisms; suffice to say, in (
+3
+) the value of
+
+w
+ does not depend on the values of 
+x
+ and 
+y
+ (although it
+may depend on the value of 
+z
+), as they belong to different
+“rows” of the complex quantifier
+
+(
+∀
+x
+∃
+y
+∀
+z
+∃
+w
+)
+, while in
+(
+4
+) the value of 
+z
+ does not depend on the value
+of 
+x
+, because this dependency is explicitly “slashed
+away” by the quantifier (
+∃
+z
+/
+x
+).
+
+
+
+One feature common to branching quantifier logic and independence
+friendly logic, as we can see, is that they do not separate the
+quantification of variables from the specification of non-standard
+patterns of dependence: as in the case of first order logic, whether a
+quantified variable 
+v
+1
+ will or will not depend on some other
+quantified variable 
+v
+2
+ will be determined by the respective
+position and form of their quantifiers.
+
+
+
+Dependence logic takes a different approach to the problem of
+extending first order logic in order to represent
+(
+2
+). Compared to (
+1
+), the only
+novel condition is the one that states that the value of 
+z
+ is
+
+determined
+ by (that is, functionally dependent on) the value
+of 
+y
+; and this corresponds to a new atomic condition 
+=
+(
+y
+,
+z
+)
+, called a 
+dependence atom
+, whose intended meaning is
+that (the value of) 
+z
+ is a function of the value of 
+y
+.
+Differently from the cases of branching quantifier logic or
+independence-friendly logic, this is a condition over the values that
+
+y
+ and 
+z
+ can take, not a condition over the behaviour of the
+quantifier 
+∃
+z
+: indeed, there is in general no reason to
+require that 
+z
+ is a quantified variable at all—it might well
+be a free variable instead, or some complex term involving multiple
+variables.
+
+
+
+In dependence logic, (
+2
+) can be formalized as 
+
+
+∀
+x
+∃
+y
+∃
+z
+(
+=
+(
+y
+,
+z
+)
+∧
+(
+BOY
+(
+x
+)
+→
+(
+GIRL
+(
+y
+)
+∧
+LOVES
+(
+x
+,
+y
+)
+→
+(
+BOY
+(
+z
+)
+∧
+x
+≠
+z
+∧
+LOVES
+(
+y
+,
+z
+)
+)
+)
+)
+)
+
+
+
+The truth conditions of (
+2
+), (
+3
+),
+(
+4
+) and (
+5
+) are precisely the same:
+any model that satisfies one of these expressions (in the respective
+languages) satisfies all four. More in general, as we will see, the
+expressive powers of existential second-order logic,
+independence-friendly logic and dependence logic 
+with respect to
+definability of classes of models
+ are precisely the same. This
+is, however, not the case for formulas with free variables; and
+furthermore, these logics can be extended and modified along markedly
+different lines.
+
+
+2. Team semantics
+
+
+
+Team semantics, first developed by Wilfrid Hodges in the context of
+independence friendly logic (Hodges 1997), is a generalization of
+Tarski’s semantics for first order logic to the case of multiple
+assignments of elements to variables. Sets of such assignments, called
+
+teams
+ for historical reasons, constitute the fundamental
+semantic notion of team semantics, and formulas are satisfied or not
+satisfied with respect to them rather than with respect to single
+assignments. The connection between team semantics and Tarski
+semantics is shown by the following result, which holds in dependence
+logic as well as in all its first order variants:
+
+
+
+
+
+
+Conservativity:
+
+
+
+A first order formula is satisfied by a team 
+X
+ (in the sense of
+team semantics) if and only if all assignments 
+s
+∈
+X
+ satisfy it
+(in the sense of Tarski semantics). 
+
+
+
+
+
+More in general, teams can be understood as 
+belief sets
+,
+representing the set of all states of the world (=assignments) that
+some agent believes possible. Then a team 
+X
+ will satisfy some
+formula 
+ϕ
+ if and only if 
+ϕ
+ holds when 
+X
+ is the set
+of all possible states; and in this case, we will write 
+X
+⊨
+ϕ
+ (or 
+M
+,
+X
+⊨
+ϕ
+ if the choice of the model 
+M
+ is
+not clear). In this section, we will examine the rules of team
+semantics and their interpretation in terms of this principle; then,
+in the next section, we will discuss how it also arises from the
+imperfect-information 
+game-theoretic semantics
+ for dependence
+logic.
+
+
+
+The condition for the new dependence atoms 
+=
+(
+x
+1
+…
+x
+n
+,
+y
+)
+, which correspond to the statement that the value of 
+y
+ is a
+function of the values of 
+x
+1
+…
+x
+n
+, is easily
+understood:
+
+
+
+
+
+
+TS-dep:
+
+
+
+
+X
+⊨
+ 
+=
+(
+x
+1
+…
+x
+n
+,
+y
+)
+ if and only if any two
+assignments 
+s
+1
+,
+s
+2
+∈
+X
+ which agree on the values of 
+x
+1
+…
+x
+n
+ also agree on the value of 
+y
+. 
+
+
+
+
+
+For example, suppose that 
+X
+ is a set of assignments over the three
+variables 
+x
+1
+, 
+x
+2
+ and 
+y
+, where 
+x
+1
+ represents the
+nationality of a candidate to a position, 
+x
+2
+ represents their
+score (according to a suitable evaluation method) and 
+y
+ represents
+whether they were accepted or rejected. Then the atom 
+=
+(
+x
+2
+,
+y
+)
+ corresponds to the statement that the offer is determined by the
+score alone: if two candidates have the same score they will receive
+exactly the same offer, regardless of any other factor. A special case
+of dependence atom is given by the 
+constancy atoms
+
+
+=
+(
+y
+)
+, which—as per the above semantics—are
+satisfied by a team if and only if all of its assignments agree over
+the value of 
+y
+.
+
+
+
+
+
+
+assignment
+x
+1
+x
+2
+y
+s
+0
+0
+0
+0
+s
+1
+0
+1
+1
+s
+2
+1
+0
+1
+s
+3
+1
+1
+2
+
+
+
+
+
+
+Table 1:
+ A team 
+X
+ in which 
+y
+=
+x
+1
++
+x
+2
+. Here 
+y
+ is a function of 
+x
+1
+ and 
+x
+2
+, and hence
+
+=
+(
+x
+1
+x
+2
+,
+y
+)
+ holds; however, 
+y
+ is not a function of
+
+x
+1
+ alone, so 
+=
+(
+x
+1
+,
+y
+)
+ does not hold.
+
+
+
+
+
+Under the same interpretation, the rules for first-order literals and
+conjunctions (for simplicity, we will assume that our expressions are
+in negation normal form; and, as is customary, we will assume that the
+negations of dependence atoms are never satisfied) are easy to
+derive:
+
+
+
+
+
+
+TS-lit:
+
+
+
+For all first-order literals 
+α
+, 
+X
+⊨
+α
+ if and
+only if for all assignments 
+s
+∈
+X
+, 
+s
+⊨
+α
+ in the
+usual Tarski semantics sense; 
+
+
+
+
+TS-
+∧
+:
+
+
+
+
+X
+⊨
+ϕ
+∧
+ψ
+ if and only if 
+X
+⊨
+ϕ
+ and
+
+X
+⊨
+ψ
+.
+
+
+
+
+
+It is worth pointing out that, as we can already see by these rules,
+the 
+law of the excluded middle
+ does not hold in dependence
+logic (just as it does not hold in independence friendly logic): for
+example, if a team 
+X
+ contains both assignments 
+s
+ with 
+s
+(
+x
+)
+=
+s
+(
+y
+)
+ and assignments 
+s
+′
+ with 
+s
+′
+(
+x
+)
+≠
+s
+′
+(
+y
+)
+ then 
+X
+⊭
+x
+=
+y
+ and 
+X
+⊭
+x
+≠
+y
+. In this section,
+in any case, we will present the language of dependence logic without
+an explicit negation operator; then, later, we will discuss the
+consequences of adding it to its language.
+
+
+
+What about universal quantification? In which circumstances should a
+universally quantified expression 
+∀
+v
+ψ
+ hold in a team?
+Again, we must recall the intuition according to which a team
+represents a set of possible states of things. If we wish to evaluate
+
+∀
+v
+ψ
+, with respect to which possible states of things
+should we evaluate 
+ψ
+? The natural answer is that we should
+consider all states of things that differ from ones in 
+X
+ only with
+respect to the value of 
+v
+. This justifies the following rule:
+
+
+
+
+
+
+TS-
+∀
+:
+
+
+
+
+X
+⊨
+∀
+v
+ψ
+ if and only if 
+X
+[
+M
+/
+v
+]
+⊨
+ϕ
+,
+where 
+X
+[
+M
+/
+v
+]
+ is the set 
+{
+s
+′
+:
+∃
+s
+∈
+X
+ s.t. 
+s
+′
+∼
+v
+x
+}
+ 
+
+
+
+
+
+where 
+s
+′
+∼
+v
+s
+ means that the two assignments 
+s
+ and 
+s
+′
+
+differ from each other at most with respect to the value of the
+variable 
+v
+.
+
+
+
+
+
+
+X
+=
+assignment
+x
+s
+0
+0
+s
+1
+1
+⇒
+X
+[
+M
+/
+y
+]
+=
+assignment
+x
+y
+s
+′
+0
+0
+0
+s
+′
+1
+0
+1
+s
+′
+2
+1
+0
+s
+′
+3
+1
+1
+
+
+
+
+
+
+Table 2:
+ 
+X
+ and 
+X
+[
+M
+/
+y
+]
+ in a model
+with two elements 
+0
+ and 
+1
+.
+
+
+
+
+
+Let us now consider disjunction. When should 
+ϕ
+∨
+ψ
+ hold?
+To answer this, let us recall—once again—that teams can be
+understood as sets of possible states of things, and that therefore
+the union of two teams 
+Y
+ and 
+Z
+ represents all states of things
+which may occur if 
+Y
+ or 
+Z
+ is the case. Therefore, if the two
+formulas 
+ϕ
+ and 
+ψ
+ are satisfied by the set of teams
+
+{
+Y
+1
+…
+Y
+n
+,
+…
+}
+ and 
+{
+Z
+1
+…
+Z
+n
+,
+…
+}
+
+respectively, their disjunction 
+ϕ
+∨
+ψ
+ should be satisfied
+by the set of teams 
+{
+Y
+i
+∪
+Z
+j
+:
+i
+,
+j
+∈
+1
+,
+…
+}
+, or,
+equivalently,
+
+
+
+
+
+
+TS-
+∨
+:
+
+
+
+
+X
+⊨
+ϕ
+∨
+ψ
+ if and only if 
+X
+=
+Y
+∪
+Z
+ for two
+teams 
+Y
+ and 
+Z
+ such that 
+Y
+⊨
+ϕ
+ and 
+Z
+⊨
+ψ
+. 
+
+
+
+
+
+It is worth pointing out here that we do 
+not
+ require, in
+general, that 
+Y
+ and 
+Z
+ are disjoint. Because of the
+
+downwards closure property
+, which we will discuss soon, this
+additional condition would make no difference for the semantics of
+dependence logic proper; but in the case of certain extensions and
+variants of dependence logic, that additional requirement would
+conflict with the principle of 
+locality
+ according to which
+the satisfaction conditions of an expression depend only on the values
+of the variables which occur free in it (Galliani 2012).
+
+
+
+It is also important to note that, in dependence logic, disjunction is
+
+not
+ idempotent: for example, 
+=
+(
+x
+,
+y
+)
+∨
+=
+(
+x
+,
+y
+)
+
+is not equivalent to 
+=
+(
+x
+,
+y
+)
+, and it is satisfied by a team
+
+X
+ if and only if for every 
+three
+ assignments in 
+X
+
+which agree on 
+x
+ at least 
+two
+ agree on 
+y
+. This may
+appear somewhat counter-intuitive; but it is a straightforward
+consequence of the fact that, under our interpretation, 
+=
+(
+x
+,
+y
+)
+∨
+=
+(
+x
+,
+y
+)
+ is to be read as “every possible state of
+things comes from one of two sets of states of things, and in both of
+them 
+y
+ is a function of 
+x
+”. Since the union of functions
+is not in general a function, it comes to little surprise that
+disjunction in dependence logic is not idempotent.
+
+
+
+Finally, we consider the case of existential quantification. When is
+the expression 
+∃
+v
+ψ
+ satisfied by a team? In order to
+answer this, we may begin by considering the interpretation of the
+
+restriction
+ operator which, given any team 
+X
+, results in
+the team 
+X
+∖
+v
+ obtained by removing the variable 
+v
+
+(if present) from all assignments 
+s
+∈
+X
+ (and then, since 
+X
+
+is a set, by collapsing identical assignments). This could be
+understood as a 
+forgetting
+ operation, through which we delete
+all information about the value of 
+v
+—for example, because
+what we believed about this value was unreliable, or because this
+value has been altered. Now suppose that 
+X
+∖
+v
+=
+Y
+∖
+v
+: then, in our interpretation, this means that the
+sets of possible states of things represented by 
+X
+ and 
+Y
+
+disagree at most with respect to the value of 
+v
+. Thus, if 
+Y
+
+satisfies the condition 
+ϕ
+, we may say that 
+X
+ would satisfy
+
+ϕ
+ 
+if not for the value of
+ 
+y
+, or, equivalently,
+that 
+X
+ satisfies 
+∃
+v
+ψ
+. This justifies the following
+rule:
+
+
+
+
+
+
+TS-
+∃
+:
+
+
+
+
+X
+⊨
+∃
+v
+ψ
+ if and only if there exists some 
+Y
+,
+over the variables of 
+X
+ and 
+v
+, such that 
+X
+∖
+v
+=
+Y
+∖
+v
+ and 
+Y
+⊨
+ψ
+. 
+
+
+
+
+
+It is straightforward to verify that this is the case if and only if
+
+Y
+ is of the form 
+X
+[
+F
+/
+y
+]
+=
+{
+s
+[
+a
+/
+y
+]
+:
+s
+∈
+X
+,
+a
+∈
+F
+(
+s
+)
+}
+ for
+some function 
+F
+ from assignments in 
+X
+ to nonempty sets of
+elements of our model.
+
+
+
+It is worth pointing out here that it is not in general required by
+the above definition that 
+X
+ and 
+Y
+ contain the same number of
+assignments: a single assignment in 
+X
+ may well correspond to
+multiple assignments in 
+Y
+, and—if 
+v
+ is already a
+variable occurring in the assignments of 
+X
+—a single
+assignment in 
+Y
+ may also correspond to multiple assignments in
+
+X
+.
+
+
+
+
+
+
+X
+=
+assignment
+x
+s
+0
+0
+s
+1
+1
+⇒
+X
+[
+F
+/
+y
+]
+=
+assignment
+x
+y
+s
+′
+0
+0
+0
+s
+′
+1
+0
+1
+s
+′
+2
+1
+0
+
+
+
+
+
+
+Table 3:
+ 
+X
+ and 
+X
+[
+F
+/
+y
+]
+ for
+
+F
+(
+s
+0
+)
+=
+{
+0
+,
+1
+}
+, 
+F
+(
+s
+1
+)
+=
+{
+0
+}
+
+
+
+
+
+We will postpone an in-depth discussion of the properties of
+dependence logic to after the specification of its game-theoretic
+semantics. However, we conclude this section with the following three
+important consequences of the above-given rules:
+
+
+
+
+
+
+Locality:
+
+
+
+If the restrictions of 
+X
+ and 
+Y
+ to the variables occurring free
+in 
+ϕ
+ are the same then 
+X
+⊨
+ϕ
+ if and only if 
+Y
+⊨
+ϕ
+. 
+
+
+
+
+Downwards closure:
+
+
+
+If 
+X
+⊨
+ϕ
+ and 
+Y
+⊆
+X
+ then 
+Y
+⊨
+ϕ
+.
+
+
+
+
+
+Empty set property:
+
+
+
+If 
+∅
+ is the team containing no assignments then
+
+∅
+⊨
+ϕ
+ for all dependence logic formulas 
+ϕ
+.
+
+
+
+
+
+
+The locality principle, together with the conservativity principle
+mentioned at the beginning of this section, constitutes an important
+“sanity condition” that any variant and extension of
+dependence logic should satisfy. The same cannot be said about
+downwards closure and the empty set property, which—as we will
+see—are violated by variants of dependence logic.
+
+
+
+Finally, we need to define the 
+truth
+ of a dependence logic
+sentence with respect to a model. Since a sentence has no free
+variables, by the locality principle we have at once that either all
+nonempty teams satisfy it or no nonempty team satisfies it. This is
+analogous to the case of Tarski’s semantics, in which a sentence
+is either satisfied by all variable assignments or by none of them.
+Thus, we can define truth in the usual way:
+
+
+
+
+
+
+Truth in team semantics:
+
+
+
+A sentence 
+ϕ
+ is true in a model 
+M
+ if and only if 
+M
+,
+{
+∅
+}
+⊨
+ϕ
+, where 
+{
+∅
+}
+ is the team
+containing only the empty assignment. In this case, we write that 
+M
+⊨
+ϕ
+. 
+
+
+
+
+2.1 Game-theoretic semantics
+
+
+
+As mentioned, the game-theoretic semantics for dependence logic is a
+variant of the imperfect-information semantics for
+independence-friendly logic, which is itself an adaptation of the
+game-theoretic semantics of first-order logic. We refer the reader to
+(Väänänen 2007a) for a formal, detailed definition of
+this semantics.
+
+
+
+In game-theoretic semantics, a sentence 
+ϕ
+ and a model 
+M
+ are
+made to correspond to a (usually two-player) game 
+G
+M
+(
+ϕ
+)
+. Then
+truth is defined in terms of the existence of 
+winning
+strategies
+ for one of the players (who, in this work, will be
+called simply “Player 
+0
+”): in other words, if
+
+σ
+0
+ is a (possibly non-deterministic) strategy for Player
+
+0
+ and 
+Π
+(
+G
+M
+(
+ϕ
+)
+,
+σ
+0
+)
+ is the set of all plays which
+are compatible with 
+σ
+0
+ then 
+ϕ
+ is true if and only if
+every play in 
+Π
+(
+G
+M
+(
+ϕ
+)
+,
+σ
+0
+)
+ is winning for Player
+
+0
+. It is possible to think of the game 
+G
+M
+(
+ϕ
+)
+ as a debate
+between two players, one of whom (Player 
+0
+) wishes to demonstrate
+that it is the case that 
+ϕ
+ while the other (Player 
+1
+)
+wishes to demonstrate that it is not the case that 
+ϕ
+.
+
+
+
+As in the case of first-order logic and independence-friendly logic,
+in the imperfect-information game for dependence logic the positions
+of the game are pairs 
+(
+θ
+,
+s
+)
+, where 
+θ
+ is an instance
+of a subformula of 
+ϕ
+ (that is, multiple occurrences of the same
+expression as a subformula of 
+ϕ
+ are to be considered
+separately) and 
+s
+ is a variable assignment over the model
+ 
+M
+.
+[
+1
+]
+
+ The initial position is 
+(
+ϕ
+,
+∅
+)
+, where 
+∅
+ is
+the empty assignment; and a non-deterministic strategy 
+σ
+0
+
+for Player 
+0
+ selects, for every disjunction and existential
+quantification, one or more 
+successors
+ of the current
+position according to the following rules:
+
+
+
+
+
+
+
+If the current position is of the form 
+(
+ψ
+∨
+θ
+,
+s
+)
+ then
+its successors are 
+(
+ψ
+,
+s
+)
+ and 
+(
+θ
+,
+s
+)
+;
+
+
+
+
+
+If the current position is of the form 
+(
+∃
+v
+ψ
+,
+s
+)
+ then
+its successors are all positions 
+(
+ψ
+,
+s
+′
+)
+ with 
+s
+′
+∼
+v
+s
+.
+
+
+
+
+
+Similarly, the successors of 
+(
+ψ
+∧
+θ
+,
+s
+)
+ are 
+(
+ψ
+,
+s
+)
+ and 
+(
+θ
+,
+s
+)
+, and the successors of 
+(
+∀
+v
+ψ
+,
+s
+)
+ are all positions of the form 
+(
+ψ
+,
+s
+′
+)
+ for 
+s
+′
+∼
+v
+s
+;
+but a strategy for Player 
+0
+ cannot specify a successor for these
+positions, as it is assumed that Player 
+1
+ chooses which position
+follows them.
+
+
+
+A sequence of positions 
+¯
+ρ
+=
+ρ
+0
+ρ
+1
+…
+ρ
+n
+ is a 
+play
+ of 
+G
+M
+(
+ϕ
+)
+ if and only if
+
+
+
+
+
+
+
+
+ρ
+0
+=
+(
+ϕ
+,
+∅
+)
+;
+
+
+
+
+
+For all 
+i
+=
+1
+…
+n
+, 
+ρ
+i
+ is a successor of
+
+ρ
+i
+−
+1
+.
+
+
+
+
+
+If furthermore 
+ρ
+i
++
+1
+∈
+σ
+0
+(
+ρ
+i
+)
+ whenever 
+ρ
+i
+
+corresponds to a disjunction or an existential quantifier, we say that
+
+¯
+ρ
+ 
+respects
+ the strategy 
+σ
+0
+; and as
+mentioned, we write 
+Π
+(
+G
+M
+(
+ϕ
+)
+,
+σ
+0
+)
+ for the set of all
+plays over 
+G
+M
+(
+ϕ
+)
+ which respect 
+σ
+0
+.
+
+
+
+We say that a strategy 
+σ
+0
+ is 
+winning
+ if every play
+
+¯
+ρ
+ which ends in a position 
+(
+α
+,
+s
+)
+ where
+
+α
+ is a first-order literal is such that the assignment 
+s
+
+satisfies 
+α
+ in the usual sense of Tarski’s semantics.
+Dependence atoms—and the plays which ends in dependence
+atoms—are of no relevance for deciding whether a given strategy
+is winning. However, they are used to specify whether a given strategy
+is 
+uniform
+:
+
+
+
+
+
+
+Uniformity condition
+
+
+
+A strategy 
+σ
+0
+ for 
+G
+M
+(
+ϕ
+)
+ is uniform if any two plays
+
+¯
+ρ
+,
+¯
+γ
+∈
+Π
+(
+G
+M
+(
+ϕ
+)
+,
+σ
+0
+)
+
+which end in two positions 
+(
+=
+(
+x
+1
+…
+x
+n
+,
+y
+)
+,
+s
+)
+,
+
+(
+=
+(
+x
+1
+…
+x
+n
+,
+y
+)
+,
+s
+′
+)
+ for the same instance of the
+dependence atom 
+=
+(
+x
+1
+…
+x
+n
+,
+y
+)
+ we have that 
+
+
+If 
+s
+(
+x
+1
+)
+…
+s
+(
+x
+n
+)
+=
+s
+′
+(
+x
+1
+)
+…
+s
+′
+(
+x
+n
+)
+ then 
+s
+(
+y
+)
+=
+s
+′
+(
+y
+)
+.
+
+
+
+
+
+Then we can define truth in game-theoretic semantics as follows:
+
+
+
+
+
+
+Truth in game-theoretic semantics:
+
+
+
+A sentence 
+ϕ
+ is true in a model 
+M
+ (with respect to
+game-theoretic semantics) if and only if Player 
+0
+ has a uniform
+winning strategy in 
+G
+M
+(
+ϕ
+)
+.
+
+
+
+
+
+It can be shown that this notion is equivalent to the notion of truth
+in team semantics. In fact, we can show more than this. If, for any
+team 
+X
+ and formula 
+ϕ
+, the game 
+G
+M
+,
+X
+(
+ϕ
+)
+ is played
+as 
+G
+M
+(
+ϕ
+)
+ but with the initial position chosen randomly for
+every play from 
+{
+(
+ϕ
+,
+s
+)
+:
+s
+∈
+X
+}
+, then the following
+holds:
+
+
+
+
+
+
+Equivalence of GTS and team semantics:
+
+
+
+A formula 
+ϕ
+ is satisfied by a team 
+X
+ (with respect to a
+model 
+M
+) if and only if Player 
+0
+ has a uniform winning
+strategy in 
+G
+M
+,
+X
+(
+ϕ
+)
+.
+
+
+
+
+
+This result, as an aside, makes it clear why the team semantics of
+dependence logic satisfies the empty set property and the downwards
+closure property. Indeed, if 
+X
+=
+∅
+ then every strategy for
+Player 
+0
+ in 
+G
+M
+,
+X
+(
+ϕ
+)
+ is trivially winning and uniform;
+and if 
+X
+⊆
+Y
+ then any uniform winning strategy for Player
+
+0
+ in 
+G
+M
+,
+X
+(
+ϕ
+)
+ is also a uniform winning strategy for
+Player 
+0
+ in 
+G
+M
+,
+Y
+(
+ϕ
+)
+.
+
+
+3. Properties
+
+
+3.1 Expressivity
+
+
+
+Sentence-wise, dependence logic is equivalent to the existential
+fragment 
+Σ
+1
+1
+ of second-order logic. More precisely, it can
+be proved (Väänänen 2007a) that
+
+
+
+
+
+
+Sentence-wise equivalence of dependence logic and
+
+Σ
+1
+1
+:
+
+
+
+For every dependence logic sentence 
+ϕ
+ there exists a
+
+Σ
+1
+1
+ sentence 
+ϕ
+∗
+ such that 
+
+
+M
+⊨
+ϕ
+⇔
+M
+⊨
+ϕ
+∗
+ for all models 
+M
+.
+
+
+
+Similarly, for every 
+Σ
+1
+1
+ sentence 
+ϕ
+∗
+ there exists a
+dependence logic sentence 
+ϕ
+ such that (
+6
+)
+holds.
+
+
+
+
+
+Since Fagin’s Theorem (Fagin 1974) shows that a property of
+finite models is definable in 
+Σ
+1
+1
+ if and only if it is
+recognizable in polynomial time by a nondeterministic Turing machine
+(that is, if and only if it is in NPTIME), it follows at once that
+
+
+
+
+
+
+Dependence logic and NPTIME:
+
+
+
+For any dependence logic sentence 
+ϕ
+, the class of all finite
+models which satisfy it is in NPTIME. Furthermore,for any NPTIME class
+
+K
+ of finite models, there exists a dependence logic
+sentence 
+ϕ
+ such that 
+M
+⊨
+ϕ
+ if and only if 
+M
+∈
+K
+.
+
+
+
+
+
+Another direct consequence of the equivalence between dependence logic
+and 
+Σ
+1
+1
+ on the level of sentences is that the compactness
+theorem and the Löwenheim-Skolem theorem both hold for dependence
+logic too (Väänänen 2007a):
+
+
+
+
+
+
+Compactness:
+
+
+
+If a set 
+Φ
+ of finite dependence logic sentences is not
+satisfiable in any model then some finite subset 
+Φ
+0
+⊆
+f
+Φ
+ of it is already not satisfiable.
+
+
+
+
+Löwenheim-Skolem theorem:
+
+
+
+If a dependence logic sentence has an infinite model then it has
+models of all infinite cardinalities.
+
+
+
+
+
+However, matters are more delicate when it comes to formulas with free
+variables. Then it is possible to show (Kontinen &
+Väänänen 2009) that dependence logic corresponds to the
+
+downwards-closed
+ fragment of existential second order
+logic:
+
+
+
+
+
+
+Team definability in dependence logic
+
+
+
+A set 
+X
+ of teams over a model 
+M
+ and a set 
+V
+ of
+variables is of the form 
+{
+X
+:
+M
+,
+X
+⊨
+ϕ
+}
+ for some
+dependence logic formula 
+ϕ
+, with free variables in 
+V
+, if
+and only if
+
+
+
+
+
+
+
+
+X
+ is nonempty;
+
+
+
+
+
+
+X
+ is downwards closed, that is, 
+Y
+⊆
+X
+∈
+X
+⇒
+Y
+∈
+X
+;
+
+
+
+
+
+
+X
+ is 
+Σ
+1
+1
+-definable in 
+M
+, that is, there
+exists a 
+Σ
+1
+1
+ 
+sentence
+ 
+Ψ
+(
+R
+)
+, over the
+vocabulary of 
+M
+ plus the new 
+|
+V
+|
+-ary relation symbol 
+R
+,
+such that 
+
+
+X
+∈
+X
+ if and only if 
+M
+,
+Rel
+(
+X
+)
+⊨
+Ψ
+(
+R
+)
+
+
+
+where 
+Rel
+(
+X
+)
+ is the 
+|
+V
+|
+-ary relation 
+{
+s
+(
+V
+)
+:
+s
+∈
+X
+}
+ which corresponds to the team 
+X
+.
+
+
+
+
+
+
+3.2 Hierarchies in dependence logic
+
+
+
+In (Durand & Kontinen 2012), the effect of restricting the number of
+dependent variables of dependence atoms or the number of universal
+quantifiers was examined. It was shown that both of these ways of
+defining fragments of dependence logic give rise of hierarchies:
+
+
+
+
+
+
+
+For all 
+k
+, let 
+D
+(
+k
+−
+∀
+)
+ be dependence logic
+restricted to at most 
+k
+ universal quantifiers and let 
+D
+(
+k
+−
+d
+e
+p
+)
+ be dependence logic restricted to dependency atoms of the
+form 
+=
+(
+→
+x
+,
+y
+)
+ for 
+|
+→
+x
+|
+≤
+k
+. Then 
+
+
+D
+(
+k
+−
+∀
+)
+<
+D
+(
+k
++
+1
+−
+d
+e
+p
+)
+,
+D
+(
+k
+−
+∀
+)
+≤
+D
+(
+k
+−
+d
+e
+p
+)
+≤
+D
+(
+k
++
+1
+−
+d
+e
+p
+)
+
+
+
+and
+
+
+D
+(
+k
+−
+∀
+)
+<
+D
+(
+2
+k
++
+2
+−
+∀
+)
+
+
+
+with respect to the expressive power of sentences.
+
+
+
+
+3.3 Negation in dependence logic
+
+
+
+So far, we assumed that all dependence logic expressions are in
+negation normal form, and that dependence atoms are never negated.
+Adding an explicit negation operator to the language of dependence
+logic, on the other hand, is somewhat problematic, owing to the fact
+that existential second order logic is not closed under negation.
+Indeed, the “obvious” negation rule 
+
+
+X
+⊨∼
+ϕ
+ if and only if 
+X
+⊭
+ϕ
+
+
+
+greatly increases the expressive power of dependence logic, extending
+it to 
+team logic
+ (Väänänen 2007a,b), which is,
+in a very strong sense, equivalent to full second order logic
+(Kontinen & Nurmi 2009).
+
+
+
+A less strong, “dual” negation 
+¬
+ can be defined in
+terms of de Morgan’s rules, 
+¬
+(
+ϕ
+∨
+[
+∧
+]
+ψ
+)
+≡
+(
+¬
+ϕ
+)
+∧
+[
+∨
+]
+(
+¬
+ψ
+)
+ and 
+¬
+(
+∃
+v
+[
+∀
+v
+]
+ϕ
+)
+≡
+∀
+v
+[
+∃
+v
+]
+(
+¬
+ϕ
+)
+, plus
+the law of double negation 
+¬
+¬
+ϕ
+≡
+ψ
+ and the
+rule 
+
+
+X
+⊨
+¬
+=
+(
+→
+x
+,
+y
+)
+ if and only if 
+X
+=
+∅
+
+
+
+for negations of dependence atoms (Väänänen 2007a,b).
+The resulting language is expressively equivalent to negation-free
+dependence logic, and, in fact, the description of dependence logic of
+(Väänänen 2007a) considers this negation as part of its
+language; however, as shown in (Kontinen & Väänänen
+2011), the satisfaction conditions of a dependence logic formula and
+those of its negation have little connection to one another. More
+precisely:
+
+
+
+
+
+
+Dual negation and dependence logic:
+
+
+
+For any two dependence logic formulas 
+ϕ
+ and 
+ψ
+ such that
+
+ϕ
+∧
+ψ
+ is not satisfiable, there exists a dependence
+logic formula 
+θ
+ such that 
+
+
+M
+,
+X
+⊨
+θ
+ if and only if 
+M
+,
+X
+⊨
+ϕ
+
+
+
+and
+
+
+M
+,
+X
+⊨
+¬
+θ
+ if and only if 
+M
+,
+X
+⊨
+ψ
+
+
+
+for all models 
+M
+ and teams 
+X
+.
+
+
+
+
+
+Thus, nothing in general can be said about the dual negation of
+
+ϕ
+ except that it is equivalent to some dependence logic
+expression which is not satisfied by any team which satisfies
+
+ϕ
+. Since, as already mentioned, the law of the excluded middle
+fails in dependence logic, this is not a very informative property; in
+particular, it is possible to find in dependence logic (with dual
+negation) equivalent expressions with non-equivalent negations, like
+for example 
+x
+≠
+x
+∧
+y
+≠
+y
+ and
+
+¬
+=
+(
+x
+,
+y
+)
+.
+
+
+3.4 Truth, validity and proof systems in dependence logic
+
+
+
+Like independence friendly logic, dependence logic can define its own
+truth operator (Väänänen 2007a), that is, if for all
+formulas 
+ϕ
+ we have that 
+⌈
+ϕ
+⌉
+ is the Gödel
+number of 
+ϕ
+ then we can find a formula 
+τ
+(
+x
+)
+, with 
+x
+
+as its only free variable, such that 
+
+
+M
+⊨
+ϕ
+ if and only if 
+M
+⊨
+τ
+(
+⌈
+ϕ
+⌉
+)
+
+
+
+for all models 
+M
+ which satisfy Peano’s axioms for natural
+numbers. This is not in contradiction with Tarski’s
+undefinability theorem, because dependence logic is not closed under
+contradictory negation.
+
+
+
+The problem of deciding whether a dependence logic sentence is valid
+(that is, true in all models) is non-arithmetical, and in fact
+complete with respect to the 
+Π
+2
+ class of the Levy hierarchy.
+Nonetheless, the proof theory of dependence logic has been studied. In
+particular, in (Kontinen & Väänänen 2013), a sound
+and complete proof system has been developed for the problem of
+finding the 
+first order
+ consequences of a dependence logic
+theory.
+
+
+4. Variants of dependence logic
+
+
+
+In this section, we will briefly summarize the properties of the most
+studied variants of dependence logic. Many such variants exist, and
+much work has been done on their classification and comparison. In
+this work, we will only mention those variants which are of special
+significance because of their relationship with dependence logic
+proper.
+
+
+4.1 Independence Logic
+
+
+
+Rather than extending first order logic with dependence atoms
+
+=
+(
+→
+x
+,
+y
+)
+, independence logic (Grädel &
+Väänänen 2013) extends it with 
+independence
+atoms
+ 
+→
+x
+⊥
+→
+z
+→
+y
+, whose intended
+interpretation is “for any possible choice of 
+→
+z
+, the
+possible values of 
+→
+x
+ and 
+→
+y
+ are
+independent”—in other words, given any fixed choice of
+
+→
+z
+, knowing the value taken by 
+→
+x
+ would not convey any
+information about the value taken by 
+→
+y
+. This is a notion of
+significant conceptual importance: for example, one may want to
+express that—if one does not know the encryption
+key—seeing the encrypted version of a message carries no
+information about the corresponding clear-text version. If 
+x
+
+represents the encrypted message and 
+y
+ represents the plain-text
+one, then this corresponds to the condition 
+x
+⊥
+y
+,
+where 
+→
+z
+ in this case is empty. Similarly, if 
+k
+ represents
+the key then 
+x
+⊥
+k
+ represents the claim that the key
+cannot be inferred from the encrypted message; and the conjunction
+dependence atom 
+=
+(
+k
+,
+x
+,
+y
+)
+ (which, as we will soon see, can
+be represented in independence logic) represents the claim that the
+plain-text message can be decoded given the encrypted message and the
+key.
+
+
+
+Formally, the satisfaction rule for independence atoms can be given as
+follows:
+
+
+
+
+
+
+TS-indep:
+
+
+
+
+M
+⊨
+X
+→
+x
+⊥
+→
+z
+→
+y
+ if and only if
+for all 
+s
+,
+s
+′
+∈
+X
+ with 
+s
+(
+→
+z
+)
+=
+s
+′
+(
+→
+z
+)
+ there exists a
+
+s
+″
+∈
+X
+ with 
+s
+″
+(
+→
+z
+→
+x
+)
+=
+s
+(
+→
+x
+→
+z
+)
+ and
+
+s
+″
+(
+→
+y
+)
+=
+s
+′
+(
+→
+y
+)
+.
+
+
+
+
+
+
+assignment
+x
+1
+x
+2
+x
+3
+s
+0
+0
+0
+0
+s
+1
+0
+1
+1
+s
+2
+1
+0
+1
+s
+3
+1
+1
+0
+
+
+
+
+
+Independence logic is strictly more expressive than dependence logic:
+indeed, it lacks the downwards closure property, and the dependence
+atom 
+=
+(
+→
+x
+,
+y
+)
+ is equivalent to the independence atom 
+y
+⊥
+→
+x
+y
+. Furthermore, it can also be shown
+(Galliani & Väänänen 2014) that conditioned
+independence atoms 
+→
+x
+⊥
+→
+y
+→
+z
+ can be
+defined in terms of 
+unconditional
+ independence atoms 
+→
+x
+⊥
+→
+y
+.
+
+
+
+Sentence-wise, independence logic is also equivalent to existential
+second order logic 
+Σ
+1
+1
+; but formula-wise, it is more
+expressive, and it was shown in Galliani 2012 that it can capture all
+nonempty 
+Σ
+1
+1
+-definable team properties.
+
+
+4.2 Inclusion logic
+
+
+
+Inclusion logic (Galliani 2012, Galliani & Hella 2013) extends
+first-order logic with 
+inclusion atoms
+ 
+→
+x
+⊆
+→
+y
+, reminiscent of the inclusion dependencies of database
+theory. Its semantics is:
+
+
+
+
+
+
+TS-inc:
+
+
+
+
+M
+⊨
+X
+→
+x
+⊆
+→
+y
+ if and only if for all 
+s
+∈
+X
+ there exists a 
+s
+′
+∈
+X
+ such that 
+s
+(
+→
+x
+)
+=
+s
+′
+(
+→
+y
+)
+.
+
+
+
+
+
+
+assignment
+x
+1
+x
+2
+s
+0
+0
+0
+s
+1
+0
+1
+s
+2
+1
+2
+s
+3
+2
+3
+
+
+
+
+
+Differently from dependence and independence logic, inclusion logic is
+(sentence-wise) strictly weaker than existential second order logic.
+In fact, it can be shown (Galliani & Hella 2013) to be equivalent
+to the positive fragment of 
+greatest fixed point logic
+, and,
+therefore, to capture PTIME properties of models over finite ordered
+models. Formula-wise, inclusion logic is strictly weaker than
+independence logic but incomparable with dependence logic: indeed, the
+satisfiability conditions of its formulas are not downwards closed,
+but they are 
+closed by unions
+ in the sense that 
+
+
+M
+,
+X
+i
+⊨
+ϕ
+∀
+i
+∈
+I
+⇒
+M
+,
+⋃
+i
+X
+i
+⊨
+ϕ
+.
+
+
+4.3 Team Logic
+
+
+
+Team logic (Väänänen 2007a,b; Kontinen & Nurmi
+2009) extends dependence logic by adding to it a 
+contradictory
+negation
+ 
+¬
+. It is equi-expressive with full second order
+logic, both in terms of definability of classes of models
+(Väänänen 2007b) and with respect to the classes of teams that team logic
+expressions can define with respect to a given model (Kontinen &
+Nurmi 2009). In (Lück 2019), a Hilbert-style axiomatization for Team Logic (and for its modal and propositional equivalents) was found that is complete for its dependence-free fragment (that is, for the fragment in which dependence atoms do not appear).
+
+
+4.4 Intuitionistic Dependence Logic
+
+
+
+Intuitionistic dependence logic (Abramsky &
+Väänänen 2009; Yang 2013) extends dependence logic by
+adding an implication connective 
+ϕ
+→
+ψ
+, whose
+satisfaction rules are given in team semantics by
+
+
+
+
+
+
+TS-
+→
+:
+
+
+
+
+X
+⊨
+ϕ
+→
+ψ
+ if and only if for all subsets
+
+Y
+ of 
+X
+, if 
+Y
+⊨
+ϕ
+ then 
+Y
+⊨
+ψ
+.
+
+
+
+
+
+This operator is called the “intuitionistic implication”,
+because of the similarity between its semantics and the one of the
+implication operator in Kripke’s semantics for intuitionistic
+logic (Kripke 1965). Its interpretation in terms of belief is quite
+straightforward: if the assignments in 
+X
+ represent the 
+states
+of thing
+ that some agent believes possible, then a subset 
+Y
+
+of 
+X
+ may represent the result of a 
+belief update
+ in which
+the agent rejects some previously believed possible states of thing,
+and 
+ϕ
+→
+ψ
+ states than any such update that would
+cause 
+ϕ
+ to hold would also cause 
+ψ
+ to hold. From this
+standpoint, this is a very natural concept which permits us to
+describe predictions about how such an agent’s overall belief
+state would react to belief updates.
+
+
+
+However, because of the second order universal quantification implicit
+in its semantics, this connective suffices to greatly increase the
+expressive complexity of the logic: in particular, as shown in (Yang
+2013), any sentence of second order logic is equivalent to some
+sentence of intuitionistic dependence logic. Intuitionistic dependence
+logic retains the downwards closure property: if a team satisfies an
+intuitionistic dependence logic formula then so do all of its
+subsets.
+
+
+4.5 Generalized Dependencies and Connectives in Team Semantics
+
+
+
+The variants and extensions of Dependence Logic seen above are all
+generated from First Order Logic (with Team Semantics) by introducing
+new atoms or connectives. It is possible to consider 
+generalized
+dependence atoms
+ (Kuusisto 2015), much in the same way in which
+generalized quantifiers are introduced in classical First Order Logic,
+and ask questions like:
+
+
+
+
+For which collections 
+D
+ of atoms or connectives is it
+the case that 
+F
+O
+(
+D
+)
+ (i.e., First Order Logic
+augmented by the atoms and connectives in 
+D
+) is
+expressively equivalent to First Order Logic? Such collections
+
+D
+ are said to be 
+strongly first order
+.
+
+
+Given a collection 
+D
+ of atoms and connectives, for
+which other collections 
+E
+ of atoms and connectives is it
+the case that 
+F
+O
+(
+D
+,
+E
+)
+ is expressively
+equivalent to 
+F
+O
+(
+D
+)
+? Such 
+E
+ are
+said to be 
+safe
+ for 
+D
+.
+
+
+
+
+
+No complete answer to these questions is known at the moment. Some
+partial results, however, are known:
+
+
+
+
+If 
+D
+ is a collection of upwards closed dependencies
+(that is to say, dependencies that, if true of some team 
+X
+ in some
+model 
+M
+, are also true of any superteam 
+Y
+⊇
+X
+ in the
+same model), plus possibly the constancy atom (that is, the
+already-mentioned special case of the dependence atom that states that
+some variable is constant over a team), then 
+D
+ is
+strongly first order (Galliani 2015);
+
+
+Not all strongly first order dependencies are safe for all
+dependencies: in particular, the constancy atom is not safe for
+
+unary
+ inclusion dependencies 
+x
+⊆
+y
+, where 
+x
+
+and 
+y
+ are single variables; the possibility operator 
+⋄
+ϕ
+, which is satisfied by a team 
+X
+ in a model 
+M
+ if and
+only if there is a nonempty subset of X that satisfies 
+ϕ
+ in
+
+M
+, is instead safe for all collections of dependencies, as are the
+totality atom (that states that some variable, or tuple of variables,
+takes all possible values) and the non-constancy atom (that states
+that some variable takes at least two different values in a team)
+(Galliani forthcoming);
+
+
+If 
+D
+ is a strongly first order collection of
+dependencies and 
+E
+ is a collection of downwards closed
+dependencies (that is, dependencies that whenever true of some team
+they are also true of every subteam), then 
+D
+ is safe for
+
+E
+ (Galliani 2019); 
+
+
+If 
+D
+ is a collection of dependencies that are
+downwards closed and 
+relativizable
+ (that is to say, adding
+relativizations of dependencies in 
+D
+ to unary predicates
+
+P
+ to the language is no more expressive than adding the
+dependencies themselves), then 
+D
+ is strongly first order
+if and only if every dependence in it can be defined in terms of
+constancy atoms (Galliani 2019). 
+
+
+
+
+
+These are all partial results, however, and the general theory of
+dependencies and connectives in Team Semantics is still in its
+infancy.
+
+
+ 
+A related topic is the study of extensions of Dependence Logic via
+generalized quantifiers (Engström 2012). An interesting result
+along these lines consists in axiomatization for the extension of
+Dependence Logic via the quantifier 
+Q
+ “there exist
+uncountably many…”, which is sound and complete for the
+
+FO
+(
+Q
+)
+ consequences of a theory (Engström, Kontinen
+& Väänänen 2017).
+
+
+ 
+Also worth pointing out in this context is the work of (Kontinen
+& Yang 2019), which found a logic based on Team Semantics (with
+different choices of connectives than the “standard” ones
+of Dependence Logic) whose formulas capture precisely the
+first-order-definable properties of teams.
+
+
+4.6 Propositional Dependence Logic
+
+
+
+The dependence and independence atoms considered so far express
+relationships between the possible values of 
+variables
+ in a
+set of assignments. However, the same notions of dependence and
+independence can be equally naturally be applied to proposition
+themselves, as it happens in natural language expression such as for
+instance “Whether he will or will not pass the course depends
+only on the content of his final exam”.
+
+
+
+Propositional Dependence Logic consider such atoms within the context
+of propositional logic. Propositional dependence logic teams are sets
+of 
+valuations
+ 
+v
+ from propositional atoms 
+p
+1
+…
+p
+n
+ to 
+{
+T
+,
+F
+}
+. Its semantic rules – and their
+justifications – mirror very closely the ones of first order
+team semantics, and the rule for dependence atoms is
+
+
+
+
+
+
+PTS-dep:
+
+
+
+
+X
+⊨
+=
+(
+p
+1
+…
+p
+n
+,
+q
+)
+ if and only if any two
+valuations 
+v
+1
+,
+v
+2
+∈
+X
+ which agree on the values of 
+p
+1
+…
+p
+n
+ also agree on the value of 
+q
+.
+
+
+
+
+
+Many of the variants and generalizations of first order dependence
+logic can be lowered to the propositional level without any
+difficulty: thus, for example, it is possible to study the properties
+of propositional inclusion logic, propositional team logic,
+propositional intuitionistic dependence logic and so on.
+
+
+
+Whereas (first order) dependence logic is strictly more expressive
+than first order logic, propositional dependence logic is not more
+expressive than propositional logic, as it follows immediately from
+the fact that all propositional functions are expressible in
+propositional logic. There exists, however, a close relation between
+the teams of propositional dependence logic and the 
+information
+states
+ of 
+inquisitive logic
+ (Groenendijk 2009; Ciardelli
+& Roelofsen 2011), a semantic framework for the study of the
+notion of meaning and information exchange: in particular, the
+implication of inquisitive logic is exactly the same as the one of
+propositional intuitionistic dependence logic.
+
+
+
+Axiomatizations for propositional dependence logic and many of its
+extensions can be found in (Yang & Väänänen 2016);
+and the analysis of the computational complexity of this formalism
+(and of related propositional logics based on Team Semantics) can be
+found in (Virtema 2017; Hannula et al. 2018).
+
+
+4.7 Modal Dependence Logic
+
+
+
+Modal dependence logic (Väänänen 2008) and its variants
+extend modal logic by adding to it the same dependence atoms
+
+=
+(
+p
+1
+…
+p
+n
+,
+q
+)
+ already considered in the case of
+propositional dependence logic.
+
+
+
+Its satisfaction conditions can be defined through a variant of team
+semantics in which teams are replaced by 
+sets
+ of possible
+worlds.
+
+
+
+Much research has investigated the complexity-theoretic properties of
+this logic, of its fragments, and its extensions (Ebbing, Lohmann,
+& Yang 2011; Ebbing & Lohmann 2012; Lohmann & Vollmer
+2013).
+
+
+
+Modal Independence Logic has also been investigated in (Kontinen et al, 2017). 
+
+
+
+4.8 Linear Temporal Logic with Team Semantics
+
+
+
+Linear Temporal Logic may also be given a “Team Semantics”
+of sorts, in which formulas are evaluated with respect to sets of
+traces (that is to say, sets of sequences of states), representing
+possible computations of a system. Such a logical framework can be
+used for the specification and verification of
+
+hyperproperties
+ (Krebs et al. 2017, Other Internet Resources;
+Lück 2020), that is to say, properties like “The system
+terminates within a bounded amount of time” whose truth cannot
+be ascertained by checking every possible trace of the system on its
+own but only by looking at the set of all possible traces as a whole.
+
+
+4.9 Quantitative Variants of Team Semantics and Dependence Logic
+
+
+
+As teams correspond to sets of assignments, it is natural to consider
+the possibility of extensions of team semantics in which satisfaction
+is defined instead with respect to 
+multiteams
+ (i.e.,
+multisets of assignments) or 
+probability distributions
+ over
+assignments.
+
+
+
+The first possibility has been studied in (Durand et al. 2018a), while
+the second has been studied in (Durand et al. 2018b). The second work,
+in particular, has led to interesting connections to problems of
+descriptive complexity over the reals and metafinite model theory
+(Hannula et al. 2019, Hannula et al. 2020). 
+
+
+
+
+5. Applications of dependence logic
+
+
+5.1 Dependence logic and database theory
+
+
+
+There is a straightforward connection between the teams of team
+semantics and the relations studied in relational database theory:
+given a team 
+X
+ and a tuple of variables 
+→
+v
+=
+v
+1
+…
+v
+k
+ occurring in its assignments, it is possible to define the
+relation 
+X
+(
+→
+v
+)
+=
+{
+⟨
+s
+(
+v
+1
+)
+,
+…
+,
+s
+(
+v
+n
+)
+⟩
+:
+s
+∈
+X
+}
+. Furthermore, the dependency atoms studied in dependence logic
+and its variants are analogous to – and in many cases, derived
+from – dependencies considered in database theory such as
+
+functional dependencies
+ (Väänänen 2007a),
+
+multivalued dependencies
+ (Engström 2012), and
+
+inclusion and exclusion dependencies
+ (Galliani 2012). The
+relationship between dependence logic and database theory contributed
+not only to the further development of dependence logic, but also to
+that of database theory: for instance, in Hannula & Kontinen 2016
+a finite axiomatization of the unrestricted implication problem for
+inclusion, functional, and embedded multivalued database-theoretic
+dependencies was found through the study of a similar problem within
+the context of team semantics.
+
+
+5.2 Dependence logic and belief representation
+
+
+
+As discussed in (Yang 2014) and (Yang & Väänänen 2016),
+there exists a close connection between (propositional) intuitionistic
+dependence logic and 
+inquisitive logic
+ (Ciardelli &
+Roelofsen, 2011), a framework for the study of meaning and information
+exchange between agents. More in general, the dependency atoms and
+connectives of studied in team semantics admit natural interpretations
+in terms of 
+belief states
+ and 
+belief updates
+, as
+discussed in (Galliani 2015). At this time, the exact nature of the
+relationship between such logics and dynamic-epistemic logic and its
+variants (Van Ditmarsch, van Der Hoek, & Kooi 2007) is largely
+unexplored, but there is ample reason to suspect further connections
+between these two areas of mathematical and philosophical logic.
+
+
+5.3 Dependence logic and Arrow’s theorem
+
+
+
+Arrow’s theorem (Arrow 1950) is a profoundly influential result
+of social choice theory that, in brief, shows that no voting system
+(that is, no system for converting rankings of individual preferences
+between alternatives into a global, societal-level preference ranking)
+exists that can satisfy three reasonable-sounding conditions,
+namely
+
+
+
+
+
+
+
+If every voter prefers 
+A
+ to 
+B
+, the group as a whole prefers
+
+A
+ and 
+B
+;
+
+
+
+
+
+Whether the group as a whole prefers 
+A
+ to 
+B
+ or vice versa
+depends exclusively on every voter’s preferences concerning
+
+A
+ and 
+B
+, and 
+not
+ on their preferences concerning
+other possible alternatives;
+
+
+
+
+
+No single voter is a 
+dictator
+, that is, the group’s
+preferences are not determined by the preferences of any single
+voter.
+
+
+
+
+
+As the wording itself suggests, the second and third conditions admit
+a natural reading in terms of dependence and independence: in fact, as
+shown in Pacuit & Yang 2016, Arrow’s theorem can be
+formalized in independence logic and proved in a suitable natural
+deduction system.
+
+
+5.4 Quantum team logic and Bell’s inequalities
+
+
+
+In (Hyttinen, Paolini, & Väänänen 2015) a variant of
+propositional team logic, called 
+quantum team logic
+, is
+introduced. In this formalism, teams are replaced by 
+quantum
+teams
+, which differ from the ordinary teams of propositional team
+logic in that they allow for the values of certain variables to be
+
+indeterminate
+ with respect to certain valuations and in that
+they allow for multiple instances of the same valuation (thus adding a
+quantitative aspect to team semantics). A semantics is then defined
+over quantum teams for a language that allows for the specification of
+
+inequalities
+ concerning the probabilities of events, and a
+sound and complete proof system is developed for it; and finally, it
+is shown that 
+Bell’s inequalities
+ admit counterexamples
+in this systems, as they do according to the predictions of quantum
+mechanics and according to experimental evidence (Einstein, Podolsky,
+& Rosen 1935; Bell 1964; Aspect, Grangier, & Roger 1981),
+while they do not so in the 
+classical
+ version of this
+framework.
+
+
+
+
+Bibliography
+
+
+
+
+Abramsky, Samson and Jouko Väänänen, 2009,
+“From IF to BI: A Tale of Dependence and Separation”,
+
+Synthese
+, 167(2): 207–230.
+doi:10.1007/s11229-008-9415-6
+
+
+Arrow, Kenneth J., 1950, “A Difficulty in the Concept of
+Social Welfare”, 
+The Journal of Political Economy
+,
+pp.328–346. doi:10.1086/256963
+
+
+Aspect, Alain, Philippe Grangier and Gérard Roger, 1981,
+“Experimental Tests of Realistic Local Theories via Bell’s
+Theorem”, 
+Physical Review Letters
+, 47(7):
+460–463. doi:10.1103/PhysRevLett.47.460
+
+
+Bell, J.S., 1964, “On the Einstein-Podolsky-Rosen
+Paradox”, 
+Physics
+, 1(3): 195–200.
+
+
+Ciardelli, Ivano and Floris Roelofsen, 2011, “Inquisitive
+Logic”, 
+Journal of Philosophical Logic
+, 40(1):
+55–94. doi:10.1007/s10992-010-9142-6
+
+
+van Ditmarsch, Hans, Wiebe van der Hoek, and Barteld Kooi,
+2007,
+Dynamic Epistemic Logic
+, (Synthese Library 337),
+Dordrecht: Springer. doi:10.1007/978-1-4020-5839-4
+
+
+Durand, Arnaud and Juha Kontinen, 2012, “Hierarchies in
+Dependence Logic”, 
+ACM Transactions on Computational Logic
+(TOCL)
+, 13(4): 1–21. doi:10.1145/2362355.2362359
+
+
+Durand, Arnaud, et al., 2018, “Approximation and dependence
+via multiteam semantics”, 
+Annals of Mathematics and
+Artificial Intelligence
+, 83(3): 297–320.
+
+
+Durand, Arnaud, et al., 2018, “Probabilistic team
+semantics”, 
+International Symposium on Foundations of
+Information and Knowledge Systems
+, Cham: Springer.
+
+
+Ebbing, Johannes and Peter Lohmann, 2012, “Complexity of
+Model Checking for Modal Dependence Logic”, 
+SOFSEM 2012:
+International Conference on Current Trends in Theory and Practice of
+Computer Science
+, (Lecture Notes in Computer Science, 7147),
+Berlin, Heidelberg: Springer, pp. 226–237.
+doi:10.1007/978-3-642-27660-6_19
+
+
+Ebbing, Johannes, Peter Lohmann, and Fan Yang, 2013, “Model
+Checking for Modal Intuitionistic Dependence Logic”,
+
+International Tbilisi Symposium on Logic, Language, and
+Computation 2011
+, (Lecture Notes in Computer Science, 7758),
+Berlin, Heidelberg: Springer, pp. 231–256.
+doi:10.1007/978-3-642-36976-6_15
+
+
+Einstein, A., B. Podolsky and N. Rosen, 1935, “Can
+Quantum-Mechanical Description of Physical Reality be Considered
+Complete?” 
+Physical Review
+, 47(10): 777–780.
+doi:10.1103/PhysRev.47.777
+
+
+Engström, Fredrik, 2012, “Generalized Quantifiers in
+Dependence Logic”, 
+Journal of Logic, Language and
+Information
+, 21(3): 299–324.
+doi:10.1007/s10849-012-9162-4
+
+
+Engström, Fredrik, Juha Kontinen, and Jouko
+Väänänen, 2017, “Dependence logic with
+generalized quantifiers: Axiomatizations”, 
+Journal of
+Computer and System Sciences
+, 88: 90–102.
+
+
+Fagin, Ronald, 1974, “Generalized First-Order Spectra and
+Polynomial-Time Recognizable Sets”, 
+Complexity of
+Computation
+ (SIAM-AMS Proceedings 7), Richard M. Karp (ed.),
+Providence, RI: American Mathematical Society, pp. 27–41.
+
+
+Galliani, Pietro, 2012, “Inclusion and Exclusion
+Dependencies in Team Semantics—On Some Logics of Imperfect
+Information”, 
+Annals of Pure and Applied Logic
+, 163(1):
+68–84. doi:10.1016/j.apal.2011.08.005
+
+
+–––, 2015, “The Doxastic Interpretation of
+Team Semantics”, 
+Logic Without Borders: Essays on Set
+Theory, Model Theory, Philosophical Logic and Philosophy of
+Mathematics
+ (Ontos Mathematical Logic, 5), Åsa Hirvonen,
+Juha Kontinen, Roman Kossak, and Andrés Villaveces (eds),
+Berlin, Boston: De Gruyter, pp. 167–192.
+doi:10.1515/9781614516873.167
+
+
+–––, 2015, “Upwards closed dependencies in
+team semantics”, 
+Information and Computation
+,  245:
+124–135.
+
+
+–––, 2019, “Characterizing downwards
+closed, strongly first-order, relativizable dependencies”,
+
+The Journal of Symbolic Logic
+, 84(3): 1136–1167
+
+
+–––, forthcoming, “Safe dependency atoms and
+possibility operators in team semantics.” 
+Information and
+Computation
+.
+
+
+Galliani, Pietro and Lauri Hella, 2013, “Inclusion Logic and
+Fixed Point Logic”, 
+Computer Science Logic 2013
+
+(Leibniz International Proceedings in Informatics: LIPIcs 23),
+Dagstuhl, Germany: Schloss Dagstuhl-Leibniz-Zentrum fuer Informatik,
+pp. 281–295. doi:10.4230/LIPIcs.CSL.2013.281
+
+
+Galliani, Pietro and Jouko Väänänen, 2014,
+“On Dependence Logic”, in 
+Johan van Benthem on Logic
+and Information Dynamics
+ (Outstanding contributions to logic, 5),
+Alexandru Baltag and Sonja Smets (eds), Cham: Springer, pp.
+101–119. doi:10.1007/978-3-319-06025-5_4
+
+
+Grädel, Erich and Jouko Väänänen, 2013,
+“Dependence and Independence”, 
+Studia Logica
+,
+101(2): 399–410. doi:10.1007/s11225-013-9479-2
+
+
+Groenendijk, Jeroen, 2009, “Inquisitive Semantics: Two
+Possibilities for Disjunction”, in Peter Bosch, David Gabelaia,
+& Jérôme Lang (eds), 
+Seventh international
+Tbilisi Symposium on Language, Logic, and Computation
+ (Lecture
+Notes in Computer Science: Volume 5422), Springer-Verlag, pp.
+80–94. doi:10.1007/978-3-642-00665-4_8
+
+
+Hannula, Miika and Juha Kontinen, 2016, “A Finite
+Axiomatization of Conditional Independence and Inclusion
+Dependencies”. 
+Information and Computation
+, 249:
+121–137. doi:10.1016/j.ic.2016.04.001
+
+
+Hannula, Miika, et al., 2018, “Complexity of propositional
+logics in team semantic”, 
+ACM Transactions on Computational
+Logic
+, 19(1): 1–14.
+
+
+
+–––, 2019, “Facets of distribution
+identities in probabilistic team semantics”, in F. Calimeri,
+N. Leone, and M. Manna (eds.), 
+Logics in Artificial
+Intelligence
+, Cham: Springer.
+
+
+–––, 2020, “Descriptive complexity of real
+computation and probabilistic independence logic”,
+
+Proceedings of the 35th Annual ACM/IEEE Symposium on Logic in
+Computer Science
+, Association for Computing Machinery, New York:
+550–563..
+
+
+Henkin, Leon, 1961, “Some Remarks on Infinitely Long
+Formulas”, in 
+Infinitistic Methods
+ (Proceedings of the
+Symposium on the Foundations of Mathematics, Warsaw, 1959), Oxford:
+Pergamon Press, pp. 167–183.
+
+
+Hodges, Wilfrid, 1997, “Compositional Semantics for a
+Language of Imperfect Information”, 
+Logic Journal of the
+IGPL
+, 5(4): 539–563. doi:10.1093/jigpal/5.4.539
+
+
+Hyttinen, Tapani, Gianluca Paolini and Jouko
+Väänänen, 2015, “Quantum Team Logic and
+Bell’s Inequalities”, 
+The Review of Symbolic
+Logic
+, 8(4): 722–742. doi:10.1017/S1755020315000192
+
+
+Kontinen, Juha and Ville Nurmi, 2009, “Team Logic and
+Second-Order Logic”, in 
+Proceedings of the 16th
+International Workshop on Logic, Language, Information, and
+Computation
+ (Lecture Notes in Computer Science, 5514), 
+Berlin, Heidelberg: Springer, pp. 230–241.
+doi:10.1007/978-3-642-02261-6_19
+
+
+Kontinen, Juha and Jouko Väänänen, 2009, “On
+Definability in Dependence Logic”, 
+Journal of Logic,
+Language and Information
+, 18(3):
+317–332.doi:10.1007/s10849-009-9082-0
+
+
+–––, 2011, “A Remark on Negation in
+Dependence Logic”, 
+Notre Dame Journal of Formal Logic
+,
+52(1): 55–65. doi:10.1215/00294527-2010-036
+
+
+–––, 2013, “Axiomatizing First-Order
+Consequences in Dependence Logic”, 
+Annals of Pure and
+Applied Logic
+, 164(11): 1101–1117.
+doi:10.1016/j.apal.2013.05.006
+
+
+Kontinen, Juha, et al., 2017, “Modal independence
+logic”, 
+Journal of Logic and Computation
+, 27(5):
+1333–1352.
+
+
+Kontinen, Juha and Fan Yang, 2019, “Logics for first-order
+team properties”, 
+International Workshop on Logic, Language,
+Information, and Computation
+, Berlin, Heidelberg: Springer.
+
+
+Kripke, Saul A., 1965, “Semantical Analysis of
+Intuitionistic Logic I”, in 
+Formal Systems and Recursive
+Functions: Proceedings of the Eighth Logic Colloquium, Oxford July
+1963
+ (Studies in Logic and the Foundations of Mathematics, 40),
+John N. Crossley and Michael A. E. Dummett (eds.), North Holland, pp.
+92–130. doi:10.1016/S0049–237X(08)71685-9
+
+
+Kuusisto, Antti, 2015, “A double team semantics for
+generalized quantifiers”, 
+Journal of Logic, Language and
+Information
+, 24(2): 149–191.
+
+
+Lohmann, Peter and Heribert Vollmer, 2013, “Complexity
+Results for Modal Dependence Logic”, 
+Studia Logica
+,
+101(2): 343–366. doi:10.1007/s11225-013-9483-6
+
+
+Lück, Martin, 2018, “Axiomatizations of team
+logics”, 
+Annals of Pure and Applied Logic
+, 169(9):
+928–969.
+
+
+–––, 2020, “On the complexity of linear
+temporal logic with team semantics”, 
+Theoretical Computer
+Science
+, 837: 1–25.
+
+
+Pacuit, Eric and Fan Yang, 2016, “Dependence and
+Independence in Social Choice: Arrow’S Theorem”, in
+
+Dependence Logic
+, Samson Abramsky, Juha Kontinen, Jouko
+Väänänen, and Heribert Vollmer (eds), Dordrecht:
+Springer, pp.  235–260. doi:10.1007/978-3-319-31803-5_11
+
+
+Väänänen, Jouko, 2007a, 
+Dependence Logic: A New
+Approach to Independence Friendly Logic
+, (London Mathematical
+Society student texts, 70), Cambridge: Cambridge University Press.
+doi:10.1017/CBO9780511611193
+
+
+–––, 2007b, “Team Logic”, in
+
+Interactive Logic: Selected Papers from the 7th Augustus de Morgan
+Workshop
+, (Texts in Logic and Games, 1), Johan van Benthem, Dov
+Gabbay, and Benedikt Löwe (eds.), Amsterdam: Amsterdam University
+Press, pp. 281–302.
+
+
+–––, 2008, “Modal Dependence Logic”,
+
+New Perspectives on Games and Interaction
+ (Texts in Logic and
+Games, 4), Krzysztof R. Apt and Robert van Rooij (eds), Amsterdam:
+Amsterdam University Press, pp.237–254.
+
+
+Virtema, Jonni, 2017, “Complexity of validity for
+propositional dependence logics”, 
+Information and
+Computation
+, 253: 224–236.
+
+
+Yang, Fan, 2013, “Expressing Second-Order Sentences in
+Intuitionistic Dependence Logic”, 
+Studia Logica
+,
+101(2): 323–342. doi:10.1007/s11225-013-9476-5
+
+
+–––, 2014, “On Extensions and Variants of
+Dependence Logic: A Study of Intuitionistic Connectives in the Team
+Semantics Setting”. PhD Thesis, University of Helsinki.
+
+
+Yang, Fan and Jouko Väänänen, 2016,
+“Propositional Logics of Dependence”, 
+Annals of Pure
+and Applied Logic
+, 167(7): 557–589.
+doi:10.1016/j.apal.2016.03.003
+
+
+
+
+
+
+
+
+Academic Tools
+
+
+
+
+
+
+
+
+
+
+How to cite this entry
+.
+
+
+
+
+
+
+
+
+Preview the PDF version of this entry
+ at the
+ 
+Friends of the SEP Society
+.
+
+
+
+
+
+
+
+
+Look up topics and thinkers related to this entry
+
+ at the Internet Philosophy Ontology Project (InPhO).
+
+
+
+
+
+
+
+
+Enhanced bibliography for this entry
+
+at 
+PhilPapers
+, with links to its database.
+
+
+
+
+
+
+
+
+
+
+
+
+Other Internet Resources
+
+
+
+
+Krebs, Andreas, et al., 2017, 
+“
+Team semantics for the specification and verification of hyperproperties
+”, 
+manuscript at arXiv.org.
+
+
+Dependence Logic on Wikipedia
+
+
+
+
+
+
+
+
+
+
+Related Entries
+
+
+
+
+compositionality
+ |
+ 
+game-theoretic semantics and pragmatics
+ |
+ 
+logic: and games
+ |
+ 
+logic: classical
+ |
+ 
+logic: independence friendly
+ |
+ 
+logic: second-order and higher-order
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+Copyright © 2021
+ by
+
+
+
+Pietro Galliani
+<
+pgallian
+@
+gmail
+.
+com
+>
+    
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+  Open access to the SEP is made possible by a world-wide funding initiative.
+
+  Please Read How You Can Help Support the Growth and Development of the Encyclopedia
+
+
+
+
+ 
+
